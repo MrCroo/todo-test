@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
 
-function App() {
+export default function App() {
+  const [tipedInText, setTipedInText] = useState([]);
+  const [textArray, setTextArray] = useState([]);
+
+  function textHandler() {
+    setTextArray((prevList) => [...prevList, tipedInText]);
+    setTipedInText("");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <input
+          type="text"
+          placeholder="Put some text here"
+          value={tipedInText}
+          onChange={(e) => setTipedInText(e.target.value)}
+        />
+        <button onClick={textHandler}>Submit</button>
+        <div>{textArray}</div>
       </header>
     </div>
   );
 }
-
-export default App;
